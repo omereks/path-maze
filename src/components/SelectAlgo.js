@@ -19,7 +19,6 @@ class SelectAlgo extends Component{
 
     handleChange = selectedOption => {
         this.setState({ selectedOption });
-        console.log(`Option selected:`, selectedOption);
         this.props.getChoice(selectedOption)
       };
 
