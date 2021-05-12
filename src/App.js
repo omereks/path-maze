@@ -4,24 +4,41 @@ import Maze from './components/Maze';
 import React, { useEffect, useState } from 'react';
 import SelectAlgo from './components/SelectAlgo';
 import { waitFor } from '@testing-library/dom';
+import { AwesomeButton } from "react-awesome-button";
+import "react-awesome-button/dist/styles.css";
+import InputNumber from 'rc-input-number';
+import "rc-input-number/assets/index.css";
 
 
+const WAITTIME = 100;
 
 function App() {
-  const [x, setX] = React.useState(10)  ;
-  const [y, setY] = React.useState(10);
+  const [x, setX] = React.useState(30)  ;
+  const [y, setY] = React.useState(25);
   const [arr, setArr] = React.useState([[]]);
+  const [AdjM, setAdjM] = React.useState([[]]);
   const [Algo, setAlgo] = React.useState("");
   const [Start, setStart] = React.useState();
   const [End, setEnd] = React.useState();
-  
+  const [Running, setRunning] = React.useState(false);
+  const [Mazeble, setMazeble] = React.useState(true);
+
   const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
   }
 
   useEffect(() => {
-    genrateMaze();
+    var arrTemp = genrateMaze();
+    checkPath(arrTemp);
+    //console.log(checkPath())
+    //while(Mazeble){
+      //setMazeble(checkPath());
+    //}
   }, []);
+
+  function checkPath(arrTemp){
+    console.log(arrTemp)
+  }
 
   function genrateMaze() {
     var arrR = [];
@@ -41,6 +58,7 @@ function App() {
     arrR[finsh][arrC.length-1] = 9;
     setEnd(x-1 + finsh*x)
     setArr(arrR)
+    return(arrR);
   }
 
   function createAdj(){
@@ -92,6 +110,7 @@ function App() {
             Adj[i][i+x] = 1
       }
     }
+    setAdjM(Adj);
     return (Adj);
   }
 
@@ -114,6 +133,24 @@ function App() {
     setArr(curArr);
   }
 
+  function clearBoard(fullMode){
+    var curArr = [[]]
+    curArr = [...arr];
+    
+    for(var i=0; i<y; i++){
+      for(var j=0; j<x; j++){
+        if(curArr[i][j]==5){
+          curArr[i][j]=1
+        }
+        if((fullMode) && (curArr[i][j]==6)){
+          curArr[i][j]=1
+        }
+      } 
+    } 
+    setArr(curArr);     
+  }
+
+
   async function printFinalPath(arrPath){
     for(var i=0; i<arrPath.length; i++){
       var number = arrPath[i];
@@ -123,9 +160,11 @@ function App() {
       var c = number%x;
       if (curArr[r][c] == 5)
         curArr[r][c] = 6
-      await sleep(500)
+      await sleep(WAITTIME)
       setArr(curArr);
-    }    
+    }
+    clearBoard(false)      
+    setRunning(false);
   }
 
   async function BFS(graph) {
@@ -142,7 +181,7 @@ function App() {
       
       //console.log(current);
       visite(current);
-      await sleep(500)
+      await sleep(WAITTIME)
       
       if (current === End) {
         var arrPath = buildPath(parents, End);
@@ -158,6 +197,43 @@ function App() {
         }
       }
     }
+    clearBoard(false);
+    setRunning(false);
+    return null;
+  }
+
+  async function DFS(graph) {
+    var parents = [];
+    var queue = [];
+    var visited = [];
+    var current;
+    //setArr([0,0,0])
+    queue.push(Start);
+    parents[Start] = null;
+    visited[Start] = true;
+    while (queue.length) {
+      current = queue.pop();
+      
+      //console.log(current);
+      visite(current);
+      await sleep(WAITTIME)
+      
+      if (current === End) {
+        var arrPath = buildPath(parents, End);
+        printFinalPath(arrPath);
+        return buildPath(parents, End);
+      }
+
+      for (var i = 0; i < graph.length; i += 1) {
+        if (i !== current && graph[current][i] && !visited[i]) {
+          parents[i] = current;
+          visited[i] = true;
+          queue.push(i);
+        }
+      }
+    }
+    clearBoard(false)
+    setRunning(false);
     return null;
   }
   
@@ -167,30 +243,58 @@ function App() {
      BFS(Adj);
     }
     if(Algo == 'DFS'){
-      BFS(Adj);
-     }
+      DFS(Adj);
+    }
   }
 
   return (
     <div className="App">
-      <label>
-        X:
-        <input type="number" value={x} onChange={(e) => {
-          genrateMaze();
-          setX(e.target.valueAsNumber)
-        }} />
-      </label>
-      <label>
-        Y:
-        <input type="number" value={y} onChange={(e) => {
-          genrateMaze();
-          setY(e.target.valueAsNumber)
-        }} />
-      </label>
-      <button onClick = {genrateMaze}>Genrate Maze</button>
+      <div className="title">Maze Solver</div>
+      <div className="inputXY">
+        <span>
+          <span className="inputText">X:</span>
+          <span className="sep">
+            <InputNumber min={3} max={99} defaultValue={x} style={{ width: 100 }} onChange={
+              (val) => {
+                setX(val)
+                //genrateMaze();
+              }            
+            }/>
+          </span>
+        </span>
+        <span className="sep">
+        <span className="inputText">Y:</span>
+        <span className="sep">
+            <InputNumber min={3} max={99} defaultValue={y} style={{ width: 100 }} onChange={
+              (val) => {
+                setY(val)
+                //genrateMaze();
+              }            
+            }/>
+          </span>
+        </span>
+        <span className="sep">
+          <AwesomeButton type="primary" disabled={Running} onPress = {genrateMaze} >Genrate Maze</AwesomeButton>;      
+        </span>
+      </div>
       <div className="algo">
-        <SelectAlgo getChoice={(algo)=>setAlgo(algo.value)} className="sele" maze={arr}></SelectAlgo>
-        <button onClick = {SolveMaze}>Solve Maze</button>
+        <span>
+          <SelectAlgo getChoice={(algo)=>setAlgo(algo.value)} className="sele" Running={Running}></SelectAlgo>
+        </span>
+        <span className="sep">
+        <AwesomeButton type="primary" disabled={(Algo=="")||(Running)}  
+          onPress = {()=>{
+            setRunning(true);
+            SolveMaze();
+            }} >Solve Maze</AwesomeButton>;      
+        </span>
+
+        <span className="sep">
+        <AwesomeButton type="primary"  
+          onPress = {()=>{
+            clearBoard();
+            }} >Clear Board</AwesomeButton>;      
+        </span>
       </div>
       <div className="maze">
         <Maze x={x} y={y} arr={arr}></Maze>

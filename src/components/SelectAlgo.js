@@ -5,7 +5,6 @@ import Select from '@mitchellhamilton/react-select-1';
 const options = [
     { value: 'BFS', label: 'BFS' },
     { value: 'DFS', label: 'DFS' },
-    { value: 'Djkstar', label: 'Djkstar' },
   ];
 
 class SelectAlgo extends Component{
@@ -13,7 +12,7 @@ class SelectAlgo extends Component{
         super(props);
         this.state = {
             selectedOption: null,
-            maze: props.maze
+            Running: props.Running
         }
     }
 
@@ -30,6 +29,8 @@ class SelectAlgo extends Component{
                 <Select value={selectedOption}
                     onChange={this.handleChange}
                     options={options}
+                    isDisabled  = {this.state.Running}
+                    placeholder = "Select Algorithm.."
                 />
             </div>
           );

@@ -1,7 +1,22 @@
+.title{
+  padding-top: 20px;
+  font-size:xx-large;
+  color: aliceblue  ;
+}
+.inputText{
+  color: aliceblue
+}
+.sep {
+  padding-left: 20px;  
+}
 .App {
   text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
 }
-
+.inputXY{
+  padding-top: 50px;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

@@ -6,37 +6,55 @@
     width: 100%;
     height: 100%;
     background-color: rgb(100, 89, 89);
-    border-style: solid;    
+    /* border-style: solid;     */
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .box1{
     width: 100%;
     height: calc(width);
     background-color: rgb(248, 248, 190);
-    border-style: solid;
+    /* border-style: solid; */
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .box2{
     width: 100%;
     height: 100%;
     background-color: blue;
-    border-style: solid;
+    /* border-style: solid; */
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
     
 }
 .box9{
     width: 100%;
     height: 100%;
     background-color: red;
-    border-style: solid;
+    /* border-style: solid; */
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .box5{
     width: 100%;
     height: 100%;
     background-color: rgb(170, 255, 155);
-    border-style: solid;
+    /* border-style: solid; */
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .box6{
     width: 100%;
     height: 100%;
     background-color: rgb(38, 255, 0);
-    border-style: solid;
+    /* border-style: solid; */
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
