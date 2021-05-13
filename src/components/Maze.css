@@ -11,6 +11,12 @@
     white-space: nowrap;
     overflow: hidden;
 }
+.box0:hover{
+    cursor: pointer;
+    -webkit-box-shadow:inset 0px 0px 0px 1px rgb(57, 58, 58);
+    -moz-box-shadow:inset 0px 0px 0px 1px rgb(57, 58, 58);
+    box-shadow:inset 0px 0px 0px 1px rgb(57, 58, 58);
+}
 .box1{
     width: 100%;
     height: calc(width);
@@ -19,6 +25,12 @@
     text-indent: 100%;
     white-space: nowrap;
     overflow: hidden;
+}
+.box1:hover{
+    cursor: pointer;
+    -webkit-box-shadow:inset 0px 0px 0px 1px rgb(57, 58, 58);
+    -moz-box-shadow:inset 0px 0px 0px 1px rgb(57, 58, 58);
+    box-shadow:inset 0px 0px 0px 1px rgb(57, 58, 58);
 }
 .box2{
     width: 100%;

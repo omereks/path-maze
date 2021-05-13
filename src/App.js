@@ -37,7 +37,7 @@ function App() {
   }, []);
 
   function checkPath(arrTemp){
-    console.log(arrTemp)
+    console.log("s")
   }
 
   function genrateMaze() {
@@ -254,18 +254,19 @@ function App() {
         <span>
           <span className="inputText">X:</span>
           <span className="sep">
-            <InputNumber min={3} max={99} defaultValue={x} style={{ width: 100 }} onChange={
+            <InputNumber disabled={Running} min={3} max={99} defaultValue={x} style={{ width: 100 }} onChange={
               (val) => {
                 setX(val)
                 //genrateMaze();
-              }            
+              }
+           
             }/>
           </span>
         </span>
         <span className="sep">
         <span className="inputText">Y:</span>
         <span className="sep">
-            <InputNumber min={3} max={99} defaultValue={y} style={{ width: 100 }} onChange={
+            <InputNumber disabled={Running} min={3} max={99} defaultValue={y} style={{ width: 100 }} onChange={
               (val) => {
                 setY(val)
                 //genrateMaze();
@@ -284,20 +285,21 @@ function App() {
         <span className="sep">
         <AwesomeButton type="primary" disabled={(Algo=="")||(Running)}  
           onPress = {()=>{
+            clearBoard(true);
             setRunning(true);
             SolveMaze();
             }} >Solve Maze</AwesomeButton>;      
         </span>
 
         <span className="sep">
-        <AwesomeButton type="primary"  
+        <AwesomeButton type="primary"  disabled={Running}
           onPress = {()=>{
-            clearBoard();
+            clearBoard(true);
             }} >Clear Board</AwesomeButton>;      
         </span>
       </div>
       <div className="maze">
-        <Maze x={x} y={y} arr={arr}></Maze>
+        <Maze x={x} y={y} arr={arr}  getChangedMaze={(maze)=>setArr(maze)}></Maze>
       </div>
     </div>
   );

@@ -7,7 +7,8 @@ class maze extends Component{
         this.state = {
             x: props.x,
             y: props.y,
-            maze: props.arr
+            maze: props.arr,
+            countBox: 0
         }
     }
 
@@ -65,20 +66,43 @@ class maze extends Component{
         }
     }
 
+    clickk() {
+        console.log("sd")
+    }
 
+    setCountBox() {
+        this.setState({ countBox: 5 })
+    }
+
+    handleChange = maze => {
+        this.props.getChangedMaze(this.state.maze)
+      };
 
     render() {
         return (
             <div className="maze">
-                {this.state.maze.map((line) => (
+                {this.state.maze.map((line, i) => (
                     <div className="row">
                         {
-                            line.map(box => (
-                                    <div className={`box`+box}>
+                            line.map((box, j) => (
+                                    
+                                    <div id={`box`+this.state.countBox} className={`box`+box} onClick={() => {
+                                        var ar = [[]]
+                                        ar = this.state.maze;
+                                        if((ar[i][j] != 2 ) && (ar[i][j] != 9) && (ar[i][j] != 6) && (ar[i][j] != 5)){
+                                            ar[i][j] = ar[i][j] == 1? 0 : 1;
+                                            this.setState({ maze: ar })
+                                            this.handleChange();
+                                        }
+                                    }} >
                                         {box}
+                                        {this.setCountBox}
                                     </div>
+                                    
+                                    
                                 ))
                         }
+                         
                     </div>
                 ))}
             </div>
