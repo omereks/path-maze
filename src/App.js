@@ -8,6 +8,8 @@ import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
 import InputNumber from 'rc-input-number';
 import "rc-input-number/assets/index.css";
+import SocialButtonsContainer from 'react-social-media-buttons';
+
 
 
 const WAITTIME = 100;
@@ -301,7 +303,19 @@ function App() {
       <div className="maze">
         <Maze x={x} y={y} arr={arr}  getChangedMaze={(maze)=>setArr(maze)}></Maze>
       </div>
-      <div className="buttom">Made by Omer Eckstein V1.0</div>
+      <div className="buttom">
+        <span>Made by Omer Eckstein v1.3</span>
+        <span className="sep">
+        <div className="socialBT">
+        <SocialButtonsContainer
+          links={['https://github.com/omereks/path-maze','https://www.linkedin.com/in/omer-eckstein-2813511aa/']}
+          buttonStyle={{width: '25px', height: '25px', margin: '0px 5px', backgroundColor: '#f0f8ff', borderRadius: '39%', border: '0px ridge #000000'}}
+          iconStyle={{color: '#282c34'}}
+          openNewTab={true}
+        />
+         </div>       
+        </span>
+      </div>
     </div>
   );
 }

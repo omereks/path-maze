@@ -70,3 +70,6 @@
     white-space: nowrap;
     overflow: hidden;
 }
+.socialBT{
+    display: -webkit-inline-box;
+}
