@@ -301,6 +301,7 @@ function App() {
       <div className="maze">
         <Maze x={x} y={y} arr={arr}  getChangedMaze={(maze)=>setArr(maze)}></Maze>
       </div>
+      <div className="buttom">Made by Omer Eckstein V1.0</div>
     </div>
   );
 }
