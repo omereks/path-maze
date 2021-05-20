@@ -3,7 +3,7 @@ v1.3
 
 This project was built by Omer Eckstein
 
-![Solving Path Demo](https://paste.pics/f4cfd5dfd65db9c6af5072a06f7cf820)
+![Solving Path Demo](https://i2.paste.pics/CJCMK.png?trs=475c231022680624d5590487b5db54382c3c1bd4cf6636753bc4d2d0f400a67e)
 
 
 ## Website
