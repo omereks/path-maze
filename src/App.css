@@ -15,7 +15,7 @@
   min-height: 100vh;
 }
 .inputXY{
-  padding-top: 50px;
+  padding-top: 20px;
 }
 .App-logo {
   height: 40vmin;
@@ -65,7 +65,6 @@
   padding-top: 20px;
   color: aliceblue  ;
 }
-.SocialButtonsContainer{
-  margin-top: ;
-  
+.as{
+  margin-top: 10px;
 }

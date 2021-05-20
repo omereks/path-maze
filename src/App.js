@@ -9,14 +9,15 @@ import "react-awesome-button/dist/styles.css";
 import InputNumber from 'rc-input-number';
 import "rc-input-number/assets/index.css";
 import SocialButtonsContainer from 'react-social-media-buttons';
+import { isMobile } from "react-device-detect";
 
 
 
 const WAITTIME = 100;
 
 function App() {
-  const [x, setX] = React.useState(30)  ;
-  const [y, setY] = React.useState(25);
+  const [x, setX] = React.useState(isMobile? 10 :40)  ;
+  const [y, setY] = React.useState(isMobile? 15 : 20);
   const [arr, setArr] = React.useState([[]]);
   const [AdjM, setAdjM] = React.useState([[]]);
   const [Algo, setAlgo] = React.useState("");
@@ -256,7 +257,7 @@ function App() {
         <span>
           <span className="inputText">X:</span>
           <span className="sep">
-            <InputNumber disabled={Running} min={3} max={99} defaultValue={x} style={{ width: 100 }} onChange={
+            <InputNumber disabled={Running} min={3} max={99} defaultValue={x} style={{ width:isMobile? 50 : 100 }} onChange={
               (val) => {
                 setX(val)
                 //genrateMaze();
@@ -268,7 +269,7 @@ function App() {
         <span className="sep">
         <span className="inputText">Y:</span>
         <span className="sep">
-            <InputNumber disabled={Running} min={3} max={99} defaultValue={y} style={{ width: 100 }} onChange={
+            <InputNumber disabled={Running} min={3} max={99} defaultValue={y} style={{ width:isMobile? 50 : 100 }} onChange={
               (val) => {
                 setY(val)
                 //genrateMaze();
@@ -277,10 +278,10 @@ function App() {
           </span>
         </span>
         <span className="sep">
-          <AwesomeButton type="primary" disabled={Running} onPress = {genrateMaze} >Genrate Maze</AwesomeButton>;      
-        </span>
+          <AwesomeButton type="primary" disabled={Running} onPress = {genrateMaze} >Genrate Maze</AwesomeButton>      
+        </span>      
       </div>
-      <div className="algo">
+      <div>
         <span>
           <SelectAlgo getChoice={(algo)=>setAlgo(algo.value)} className="sele" Running={Running}></SelectAlgo>
         </span>
@@ -290,7 +291,7 @@ function App() {
             clearBoard(true);
             setRunning(true);
             SolveMaze();
-            }} >Solve Maze</AwesomeButton>;      
+            }} >Solve Maze</AwesomeButton>      
         </span>
 
         <span className="sep">

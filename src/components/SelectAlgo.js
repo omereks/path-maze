@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import  './SelectAlgo.css';
 import Select from '@mitchellhamilton/react-select-1';
+import { isMobile } from "react-device-detect";
 
 const options = [
     { value: 'BFS', label: 'BFS' },
@@ -30,7 +31,8 @@ class SelectAlgo extends Component{
                     onChange={this.handleChange}
                     options={options}
                     isDisabled  = {this.state.Running}
-                    placeholder = "Select Algorithm.."
+                    placeholder = {isMobile? 'Algo': 'Select Algorithm..'}
+                    className={isMobile? 'selec': ''}
                 />
             </div>
           );
