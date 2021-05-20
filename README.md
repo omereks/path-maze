@@ -1,5 +1,5 @@
 v1.3
-# Solving Path Demo
+# Solving Maze Demo
 
 This project was built by Omer Eckstein
 
